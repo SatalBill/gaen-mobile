@@ -12,6 +12,8 @@ import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 
+import * as ExposureAPI from "../exposureAPI"
+import { ExposureKey } from "../../exposureKey"
 import { Button } from "../../components/Button"
 import { GlobalText } from "../../components/GlobalText"
 
@@ -25,25 +27,31 @@ import {
   Iconography,
   Typography,
 } from "../../styles"
-import { useExposureContext } from "../../ExposureContext"
 
 interface PublishConsentFormProps {
   hmacKey: string
   certificate: string
+  exposureKeys: ExposureKey[]
 }
 
 const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   hmacKey,
   certificate,
+  exposureKeys,
 }) => {
-  const strategy = useExposureContext()
   const navigation = useNavigation()
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(false)
   const handleOnPressConfirm = async () => {
     setIsLoading(true)
     try {
-      await strategy.submitDiagnosisKeys(certificate, hmacKey)
+      // await strategy.submitDiagnosisKeys(certificate, hmacKey)
+      await ExposureAPI.postDiagnosisKeys(
+        exposureKeys,
+        [],
+        certificate,
+        hmacKey,
+      )
       setIsLoading(false)
       navigation.navigate(Screens.AffectedUserComplete)
     } catch (e) {

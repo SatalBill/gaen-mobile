@@ -37,7 +37,10 @@ const CodeInputForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const strategy = useExposureContext()
-  const { setExposureSubmissionCredentials } = useAffectedUserContext()
+  const {
+    setExposureSubmissionCredentials,
+    setExposureKeys,
+  } = useAffectedUserContext()
 
   const [code, setCode] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -70,6 +73,7 @@ const CodeInputForm: FunctionComponent = () => {
 
         if (certResponse.kind === "success") {
           const certificate = certResponse.body.certificate
+          setExposureKeys(exposureKeys)
           setExposureSubmissionCredentials(certificate, hmacKey)
           Keyboard.dismiss()
           navigation.navigate(Screens.AffectedUserPublishConsent)
