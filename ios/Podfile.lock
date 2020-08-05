@@ -286,7 +286,7 @@ PODS:
   - Realm/Headers (5.0.0)
   - RealmSwift (5.0.0):
     - Realm (= 5.0.0)
-  - RNBackgroundFetch (3.0.4):
+  - RNBackgroundFetch (3.1.0):
     - React
   - RNCAsyncStorage (1.10.0):
     - React
@@ -524,7 +524,7 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   Realm: 76066d333de26f97e9caedaa85ee3ff4a62ca265
   RealmSwift: c1bdff09b422569dc6881410d9ccf712bcdb79b0
-  RNBackgroundFetch: 388cf1595934d22fed275b8db9b48a28bb4eb7b6
+  RNBackgroundFetch: 8dbb63141792f1473e863a0797ffbd5d987af2fc
   RNCAsyncStorage: 6d99641f8e6f15d169d695d8ef184bf187903f11
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNCPushNotificationIOS: dc1c0c6aa18a128df123598149f42e848d26a4ac

@@ -7,12 +7,13 @@ import {
   StyleSheet,
   View,
   SafeAreaView,
+  Platform,
 } from "react-native"
 import { SvgXml } from "react-native-svg"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
+import env from "react-native-config"
 
-import * as ExposureAPI from "../exposureAPI"
 import { ExposureKey } from "../../exposureKey"
 import { Button } from "../../components/Button"
 import { GlobalText } from "../../components/GlobalText"
@@ -27,6 +28,7 @@ import {
   Iconography,
   Typography,
 } from "../../styles"
+import * as ExposureAPI from "../exposureNotificationAPI"
 
 interface PublishConsentFormProps {
   hmacKey: string
@@ -44,16 +46,28 @@ const PublishConsentForm: FunctionComponent<PublishConsentFormProps> = ({
   const [isLoading, setIsLoading] = useState(false)
   const handleOnPressConfirm = async () => {
     setIsLoading(true)
+    const appPackageName = Platform.select({
+      ios: env.IOS_BUNDLE_ID,
+      android: env.ANDROID_APPLICATION_ID,
+    }) as string
+
     try {
       // await strategy.submitDiagnosisKeys(certificate, hmacKey)
-      await ExposureAPI.postDiagnosisKeys(
+      const response = await ExposureAPI.postDiagnosisKeys(
         exposureKeys,
-        [],
+        env.REGION_CODES.split(","),
         certificate,
         hmacKey,
+        appPackageName,
       )
       setIsLoading(false)
-      navigation.navigate(Screens.AffectedUserComplete)
+      if (response.kind === "success") {
+        navigation.navigate(Screens.AffectedUserComplete)
+      } else {
+        if (response.error === "Unknown") {
+          Alert.alert(t("common.something_went_wrong"), response.message)
+        }
+      }
     } catch (e) {
       setIsLoading(false)
       Alert.alert(t("common.something_went_wrong"), e.message)

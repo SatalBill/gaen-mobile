@@ -18,6 +18,7 @@ interface NetworkSuccess<T> {
 interface NetworkFailure<U> {
   kind: "failure"
   error: U
+  message?: string
 }
 
 export type NetworkResponse<T, U = "Unknown"> =
@@ -32,19 +33,22 @@ export type PostKeysError = "Unknown"
 
 type RegionCode = string
 
+const DEFAULT_PADDING = ""
+
 export const postDiagnosisKeys = async (
   exposureKeys: ExposureKey[],
-  _regionCodes: RegionCode[],
+  regionCodes: RegionCode[],
   certificate: Token,
   hmacKey: string,
-): Promise<NetworkResponse<PostKeysSuccess>> => {
+  appPackageName: string,
+): Promise<NetworkResponse<PostKeysSuccess, PostKeysError>> => {
   const data = {
     temporaryExposureKeys: exposureKeys,
-    regions: ["US"],
-    appPackageName: "org.pathcheck.bt",
+    regions: regionCodes,
+    appPackageName,
     verificationPayload: certificate,
     hmackey: hmacKey,
-    padding: "",
+    padding: DEFAULT_PADDING,
   }
 
   try {
@@ -59,10 +63,10 @@ export const postDiagnosisKeys = async (
       console.log("successful response:", json.body)
       return { kind: "success", body: json.body }
     } else {
-      console.log("Error posting diagnosisKeys", json.error)
+      console.log("Error posting diagnosisKeys", JSON.stringify(json))
       switch (json.error) {
         default: {
-          return { kind: "failure", error: "Unknown" }
+          return { kind: "failure", error: "Unknown", message: json.error }
         }
       }
     }
