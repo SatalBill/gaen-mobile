@@ -34,15 +34,17 @@ type RegionCode = string
 
 export const postDiagnosisKeys = async (
   exposureKeys: ExposureKey[],
-  regionCodes: RegionCode[],
+  _regionCodes: RegionCode[],
   certificate: Token,
   hmacKey: string,
 ): Promise<NetworkResponse<PostKeysSuccess>> => {
   const data = {
-    exposureKeys,
-    regionCodes,
-    certificate,
-    hmacKey,
+    temporaryExposureKeys: exposureKeys,
+    regions: ["US"],
+    appPackageName: "org.pathcheck.bt",
+    verificationPayload: certificate,
+    hmackey: hmacKey,
+    padding: "",
   }
 
   try {

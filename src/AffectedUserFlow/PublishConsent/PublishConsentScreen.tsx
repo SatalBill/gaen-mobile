@@ -9,10 +9,16 @@ import PublishConsentForm from "./PublishConsentForm"
 const PublishConsentScreen: FunctionComponent = () => {
   useStatusBarEffect("light-content")
   const navigation = useNavigation()
-  const { certificate, hmacKey } = useAffectedUserContext()
+  const { certificate, hmacKey, exposureKeys } = useAffectedUserContext()
 
   if (hmacKey && certificate) {
-    return <PublishConsentForm hmacKey={hmacKey} certificate={certificate} />
+    return (
+      <PublishConsentForm
+        hmacKey={hmacKey}
+        certificate={certificate}
+        exposureKeys={exposureKeys}
+      />
+    )
   } else {
     return (
       <View>
