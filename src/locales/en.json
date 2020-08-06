@@ -128,12 +128,12 @@
       "tracing_off_subheader": "Enable Bluetooth and Proximity Tracing to get info about possible exposures",
       "unauthorized_error_message": "To activate Proximity Tracing, authorize COVID-19 Exposure Logging in the Settings app",
       "unauthorized_error_title": "Authorize in Settings",
-      "bluetooth_disabled_error_title":"Enable Bluetooth in Settings",
-      "bluetooth_disabled_error_message":"Turn  on Bluetooth in your Settings app",
-      "share":"Share the app and help contain the outbreak",
-      "share_message":"Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadLink}}",
-      "fix":"Fix",
-      "report_positive_result":"Report positive test result"
+      "bluetooth_disabled_error_title": "Enable Bluetooth in Settings",
+      "bluetooth_disabled_error_message": "Turn on Bluetooth in your Settings app",
+      "share": "Share the app and help contain the outbreak",
+      "share_message": "Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadLink}}",
+      "fix": "Fix",
+      "report_positive_result": "Report positive test result"
     }
   },
   "label": {

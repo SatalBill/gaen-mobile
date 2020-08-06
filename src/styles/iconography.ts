@@ -34,4 +34,3 @@ export const extraLargeIcon: ViewStyle = {
   height: extraLarge,
   width: extraLarge,
 }
-

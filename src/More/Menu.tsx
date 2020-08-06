@@ -16,8 +16,7 @@ import {
 
 import { getLocalNames } from "../locales/languages"
 import { GlobalText } from "../components/GlobalText"
-import { Button } from "../components/Button"
-import { Stacks, Screens, useStatusBarEffect } from "../navigation"
+import { Screens, useStatusBarEffect } from "../navigation"
 
 import { Icons } from "../assets"
 import { Iconography, Colors, Spacing, Typography } from "../styles"
@@ -168,4 +167,3 @@ const style = StyleSheet.create({
 })
 
 export default MenuScreen
-

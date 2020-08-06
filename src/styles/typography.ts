@@ -149,7 +149,7 @@ export const header6: TextStyle = {
 // Content
 export const mainContent: TextStyle = {
   ...mediumFont,
-  color: Colors.primaryText,
+  color: Colors.secondaryText,
 }
 
 export const secondaryContent: TextStyle = {
@@ -241,4 +241,3 @@ export const buttonSecondaryInvertedText: TextStyle = {
   ...buttonTextSmall,
   color: Colors.lighterGray,
 }
-
