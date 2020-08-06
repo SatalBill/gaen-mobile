@@ -2,7 +2,7 @@ import { ViewStyle } from "react-native"
 
 export const xSmall = 18
 export const small = 30
-export const medium = 50
+export const medium = 60
 export const large = 70
 export const extraLarge = 100
 
@@ -34,3 +34,4 @@ export const extraLargeIcon: ViewStyle = {
   height: extraLarge,
   width: extraLarge,
 }
+

@@ -18,7 +18,14 @@ import { ENPermissionStatus } from "../PermissionsContext"
 import { GlobalText } from "../components/GlobalText"
 
 import { Icons, Images } from "../assets"
-import { Spacing, Colors, Typography, Layout, Outlines } from "../styles"
+import {
+  Spacing,
+  Colors,
+  Typography,
+  Layout,
+  Outlines,
+  Iconography,
+} from "../styles"
 
 const HomeScreen: FunctionComponent = () => {
   useStatusBarEffect("light-content")
@@ -85,23 +92,32 @@ const HomeScreen: FunctionComponent = () => {
       </View>
       <ScrollView style={style.bottomContainer}>
         <View style={style.shareContainer}>
-          <Image source={Images.HugEmoji} />
-          <GlobalText style={style.bottomHeaderText}>
-            {t("home.share")}
-          </GlobalText>
+          <View style={style.shareImageContainer}>
+            <Image source={Images.HugEmoji} style={style.shareImage} />
+          </View>
+          <View style={style.shareTextContainer}>
+            <GlobalText style={style.shareText}>
+              {t("home.bluetooth.share")}
+            </GlobalText>
+          </View>
+          <View style={style.shareIconContainer}>
+            <SvgXml
+              xml={Icons.Share}
+              width={Iconography.small}
+              height={Iconography.small}
+            />
+          </View>
         </View>
-        <ActivationStatusSection
-          headerText={t("home.bluetooth_header")}
-          bodyText={t("home.bluetooth_body")}
-        />
-        <ActivationStatusSection
-          headerText={t("home.proximity_tracing_header")}
-          bodyText={t("home.proximity_tracing_body")}
-        />
-        <ActivationStatusSection
-          headerText={t("home.notifications_header")}
-          bodyText={t("home.notifications_body")}
-        />
+        <View style={style.activationStatusSectionContainer}>
+          <ActivationStatusSection
+            headerText={t("home.bluetooth.bluetooth_header")}
+            bodyText={t("common.enabled")}
+          />
+          <ActivationStatusSection
+            headerText={t("home.bluetooth.proximity_tracing_header")}
+            bodyText={t("common.enabled")}
+          />
+        </View>
       </ScrollView>
     </ImageBackground>
   )
@@ -118,7 +134,12 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
 }) => {
   return (
     <View style={style.activationStatusContainer}>
-      <SvgXml xml={Icons.CheckInCircle} fill={Colors.primaryGreen} />
+      <SvgXml
+        xml={Icons.CheckInCircle}
+        fill={Colors.primaryGreen}
+        width={Iconography.medium}
+        height={Iconography.medium}
+      />
       <View style={style.activationStatusTextContainer}>
         <GlobalText style={style.bottomHeaderText}>{headerText}</GlobalText>
         <GlobalText style={style.bottomBodyText}>{bodyText}</GlobalText>
@@ -167,21 +188,49 @@ const style = StyleSheet.create({
     alignItems: "center",
     paddingVertical: Spacing.small,
     paddingHorizontal: Spacing.small,
-    backgroundColor: Colors.lightestGray,
+    backgroundColor: Colors.faintGray,
+    borderBottomColor: Colors.lightestGray,
+    borderBottomWidth: Outlines.hairline,
+  },
+  shareImageContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: Colors.tertiaryViolet,
+    borderRadius: Outlines.borderRadiusMax,
+    width: Iconography.medium,
+    height: Iconography.medium,
+  },
+  shareImage: {
+    width: Iconography.small,
+    height: Iconography.small,
+  },
+  shareTextContainer: {
+    flex: 1,
+    marginHorizontal: Spacing.medium,
+  },
+  shareText: {
+    ...Typography.header4,
+  },
+  shareIconContainer: {
+    padding: Spacing.xxxSmall,
+  },
+  activationStatusSectionContainer: {
+    marginBottom: Spacing.small,
   },
   activationStatusContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: Spacing.medium,
+    paddingVertical: Spacing.large,
     marginHorizontal: Spacing.small,
     borderBottomWidth: Outlines.hairline,
     borderBottomColor: Colors.lightestGray,
   },
   activationStatusTextContainer: {
-    marginLeft: Spacing.small,
+    marginLeft: Spacing.medium,
   },
   bottomHeaderText: {
-    ...Typography.header5,
+    ...Typography.header4,
+    marginBottom: Spacing.xxxSmall,
   },
   bottomBodyText: {
     ...Typography.secondaryContent,

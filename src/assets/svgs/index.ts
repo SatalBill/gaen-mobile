@@ -25,6 +25,7 @@ import Publish from "./publish"
 import QuestionMark from "./questionMark"
 import RadioWave from "./radioWave"
 import SelfAssessment from "./selfAssessment"
+import Share from "./share"
 import SixFeet from "./sixFeet"
 import StateNoContact from "./stateNoContact"
 import StateUnknown from "./stateUnknown"
@@ -59,6 +60,7 @@ export const Icons = {
   QuestionMark,
   RadioWave,
   SelfAssessment,
+  Share,
   SixFeet,
   StateNoContact,
   StateUnknown,
