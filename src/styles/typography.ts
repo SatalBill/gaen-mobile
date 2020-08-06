@@ -82,7 +82,7 @@ export const smallFont: TextStyle = {
 export const mediumFont: TextStyle = {
   ...base,
   fontSize: medium,
-  lineHeight: largeLineHeight,
+  lineHeight: mediumLineHeight,
 }
 
 export const largeFont: TextStyle = {
@@ -136,7 +136,7 @@ export const header4: TextStyle = {
 
 export const header5: TextStyle = {
   ...mediumFont,
-  ...extraBold,
+  ...mediumBold,
   color: Colors.primaryHeaderText,
 }
 
@@ -242,3 +242,4 @@ export const buttonSecondaryInvertedText: TextStyle = {
   ...buttonTextSmall,
   color: Colors.lighterGray,
 }
+

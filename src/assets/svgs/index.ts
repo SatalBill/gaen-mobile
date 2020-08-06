@@ -6,6 +6,7 @@ import Bell from "./bell"
 import BellYellow from "./bellYellow"
 import CheckboxChecked from "./checkboxChecked"
 import CheckboxUnchecked from "./checkboxUnchecked"
+import CheckInCircle from "./checkInCircle"
 import Checkmark from "./checkmark"
 import CheckmarkCircle from "./checkmarkCircle"
 import ChevronRight from "./chevronRight"
@@ -39,6 +40,7 @@ export const Icons = {
   BellYellow,
   CheckboxChecked,
   CheckboxUnchecked,
+  CheckInCircle,
   Checkmark,
   CheckmarkCircle,
   ChevronRight,
@@ -63,3 +65,4 @@ export const Icons = {
   Upload,
   WashHands,
 }
+

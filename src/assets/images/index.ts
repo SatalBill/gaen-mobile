@@ -6,6 +6,7 @@ const Doctors = require("./doctors.png")
 const EmptyPathBackground = require("./emptyPathBackground.png")
 const Export = require("./export.png")
 const ForeArrow = require("./foreArrow.png")
+const HugEmoji = require("./hugEmoji.png")
 const IsolatePathBackground = require("./isolatePathBackground.png")
 const MultipleCrossPathBackground = require("./multipleCrossPathBackground.png")
 const PeopleHighFiving = require("./peopleHighFiving.png")
@@ -24,6 +25,7 @@ export const Images = {
   EmptyPathBackground,
   Export,
   ForeArrow,
+  HugEmoji,
   IsolatePathBackground,
   MultipleCrossPathBackground,
   PeopleHighFiving,
@@ -33,3 +35,4 @@ export const Images = {
   PersonWithLockedPhone,
   SingleCrossPathBackground,
 }
+

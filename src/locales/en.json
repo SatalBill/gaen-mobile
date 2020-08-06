@@ -117,9 +117,10 @@
   },
   "home": {
     "bluetooth": {
-      "all_services_on_subheader": "Exposure notifications are on",
+      "all_services_on_subheader": "COVIDaware will remain active after the app has been closed",
       "tracing_off_button": "Allow Exposure Notifications",
-      "tracing_off_header": "Exposure Notifications Disabled",
+      "tracing_on_header": "Active",
+      "tracing_off_header": "Inactive",
       "tracing_off_subheader": "Enable Exposure Notifications to receive information about possible exposures",
       "unauthorized_error_message": "You must authorize COVID-19 Exposure Logging in the Settings app to continue.",
       "unauthorized_error_title": "Please Update Settings"
