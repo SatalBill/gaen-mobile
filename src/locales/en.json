@@ -131,6 +131,7 @@
       "bluetooth_disabled_error_title":"Enable Bluetooth in Settings",
       "bluetooth_disabled_error_message":"Turn  on Bluetooth in your Settings app",
       "share":"Share the app and help contain the outbreak",
+      "share_message":"Check out this app {{applicationName}}, which can help us contain COVID-19! {{appDownloadLink}}",
       "fix":"Fix",
       "report_positive_result":"Report positive test result"
     }

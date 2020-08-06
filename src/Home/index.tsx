@@ -9,6 +9,7 @@ import {
   ImageBackground,
   Image,
   View,
+  Share,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useTranslation } from "react-i18next"
@@ -22,6 +23,7 @@ import { isPlatformiOS } from "../utils/index"
 import { ENPermissionStatus } from "../PermissionsContext"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
+import { useApplicationInfo } from "../More/useApplicationInfo"
 
 import { Icons, Images } from "../assets"
 import {
@@ -76,16 +78,33 @@ const HomeScreen: FunctionComponent = () => {
     )
   }
 
+  const { applicationName } = useApplicationInfo()
+  const appDownloadLink = "https://pathcheck.org"
+  // TODO: Replace with actual app download link
+
+  const handleOnPressShare = async () => {
+    try {
+      await Share.share({
+        message: t("home.bluetooth.share_message", {
+          applicationName,
+          appDownloadLink,
+        }),
+      })
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
+  const handleOnPressBluetooth = () => {
+    showBluetoothDisabledAlert()
+  }
+
   const handleOnPressProximityTracing = () => {
     if (isAuthorized) {
       exposureNotifications.request()
     } else if (isPlatformiOS()) {
       showUnauthorizedAlert()
     }
-  }
-
-  const handleOnPressBluetooth = () => {
-    showBluetoothDisabledAlert()
   }
 
   const isProximityTracingOn = isEnabledAndAuthorized
@@ -120,7 +139,10 @@ const HomeScreen: FunctionComponent = () => {
       </View>
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView style={bottomContainerStyle}>
-          <TouchableOpacity style={style.shareContainer}>
+          <TouchableOpacity
+            style={style.shareContainer}
+            onPress={handleOnPressShare}
+          >
             <View style={style.shareImageContainer}>
               <Image source={Images.HugEmoji} style={style.shareImage} />
             </View>
