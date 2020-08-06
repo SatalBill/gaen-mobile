@@ -149,7 +149,6 @@ export const header6: TextStyle = {
 // Content
 export const mainContent: TextStyle = {
   ...mediumFont,
-  fontWeight: lightWeight,
   color: Colors.primaryText,
 }
 

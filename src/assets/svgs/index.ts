@@ -31,6 +31,7 @@ import StateNoContact from "./stateNoContact"
 import StateUnknown from "./stateUnknown"
 import Upload from "./upload"
 import WashHands from "./WashHands"
+import XInCircle from "./xInCircle"
 
 export const Icons = {
   AnonymizedData,
@@ -66,5 +67,6 @@ export const Icons = {
   StateUnknown,
   Upload,
   WashHands,
+  XInCircle,
 }
 
