@@ -4,18 +4,22 @@ import {
   Alert,
   Linking,
   StyleSheet,
+  SafeAreaView,
   ImageBackground,
   Image,
   View,
 } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
+import { useNavigation } from "@react-navigation/native"
 
 import { usePermissionsContext } from "../PermissionsContext"
-import { useStatusBarEffect } from "../navigation"
+import { useStatusBarEffect, Stacks } from "../navigation"
 import { isPlatformiOS } from "../utils/index"
 import { ENPermissionStatus } from "../PermissionsContext"
 import { GlobalText } from "../components/GlobalText"
+import { Button } from "../components/Button"
 
 import { Icons, Images } from "../assets"
 import {
@@ -28,9 +32,11 @@ import {
 } from "../styles"
 
 const HomeScreen: FunctionComponent = () => {
-  useStatusBarEffect("light-content")
-  const { exposureNotifications } = usePermissionsContext()
   const { t } = useTranslation()
+  const navigation = useNavigation()
+  const { exposureNotifications } = usePermissionsContext()
+  const insets = useSafeAreaInsets()
+  useStatusBarEffect("light-content")
 
   const [
     authorization,
@@ -68,6 +74,11 @@ const HomeScreen: FunctionComponent = () => {
     ? t("home.bluetooth.all_services_on_subheader")
     : t("home.bluetooth.tracing_off_subheader")
 
+  const bottomContainerStyle = {
+    ...style.bottomContainer,
+    maxHeight: insets.bottom + Layout.screenHeight * 0.45,
+  }
+
   return (
     <ImageBackground
       style={style.backgroundImage}
@@ -90,35 +101,43 @@ const HomeScreen: FunctionComponent = () => {
           {subheaderText}
         </GlobalText>
       </View>
-      <ScrollView style={style.bottomContainer}>
-        <View style={style.shareContainer}>
-          <View style={style.shareImageContainer}>
-            <Image source={Images.HugEmoji} style={style.shareImage} />
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView style={bottomContainerStyle}>
+          <View style={style.shareContainer}>
+            <View style={style.shareImageContainer}>
+              <Image source={Images.HugEmoji} style={style.shareImage} />
+            </View>
+            <View style={style.shareTextContainer}>
+              <GlobalText style={style.shareText}>
+                {t("home.bluetooth.share")}
+              </GlobalText>
+            </View>
+            <View style={style.shareIconContainer}>
+              <SvgXml
+                xml={Icons.Share}
+                width={Iconography.small}
+                height={Iconography.small}
+              />
+            </View>
           </View>
-          <View style={style.shareTextContainer}>
-            <GlobalText style={style.shareText}>
-              {t("home.bluetooth.share")}
-            </GlobalText>
-          </View>
-          <View style={style.shareIconContainer}>
-            <SvgXml
-              xml={Icons.Share}
-              width={Iconography.small}
-              height={Iconography.small}
+          <View style={style.activationStatusSectionContainer}>
+            <ActivationStatusSection
+              headerText={t("home.bluetooth.bluetooth_header")}
+              bodyText={t("common.enabled")}
+            />
+            <ActivationStatusSection
+              headerText={t("home.bluetooth.proximity_tracing_header")}
+              bodyText={t("common.enabled")}
             />
           </View>
-        </View>
-        <View style={style.activationStatusSectionContainer}>
-          <ActivationStatusSection
-            headerText={t("home.bluetooth.bluetooth_header")}
-            bodyText={t("common.enabled")}
+          <Button
+            onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
+            label={t("home.bluetooth.report_positive_result")}
+            customButtonStyle={style.button}
+            hasRightArrow
           />
-          <ActivationStatusSection
-            headerText={t("home.bluetooth.proximity_tracing_header")}
-            bodyText={t("common.enabled")}
-          />
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </SafeAreaView>
     </ImageBackground>
   )
 }
@@ -155,13 +174,13 @@ const style = StyleSheet.create({
   concentricCirclesContainer: {
     position: "absolute",
     left: "-50%",
-    bottom: "-30%",
+    bottom: "-27.5%",
   },
   textContainer: {
     alignSelf: "center",
     marginHorizontal: Spacing.medium,
     position: "absolute",
-    top: "30%",
+    top: "27.5%",
     alignItems: "center",
   },
   headerText: {
@@ -181,7 +200,6 @@ const style = StyleSheet.create({
     bottom: 0,
     width: "100%",
     backgroundColor: Colors.primaryBackground,
-    maxHeight: Layout.screenHeight / 2 - 50,
   },
   shareContainer: {
     flexDirection: "row",
@@ -215,7 +233,7 @@ const style = StyleSheet.create({
     padding: Spacing.xxxSmall,
   },
   activationStatusSectionContainer: {
-    marginBottom: Spacing.small,
+    marginBottom: Spacing.medium,
   },
   activationStatusContainer: {
     flexDirection: "row",
@@ -234,6 +252,10 @@ const style = StyleSheet.create({
   },
   bottomBodyText: {
     ...Typography.secondaryContent,
+  },
+  button: {
+    alignSelf: "center",
+    marginBottom: Spacing.medium,
   },
 })
 

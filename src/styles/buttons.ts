@@ -45,7 +45,7 @@ export const primary: ViewStyle = {
   ...base,
   ...large,
   borderRadius: Outlines.borderRadiusMax,
-  paddingHorizontal: Spacing.huge,
+  paddingHorizontal: Spacing.xHuge,
   minWidth: 225,
 }
 
@@ -62,3 +62,4 @@ export const tinyRounded: ViewStyle = {
   ...maxCornerRoundness,
   ...tertiaryBlue,
 }
+

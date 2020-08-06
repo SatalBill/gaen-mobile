@@ -128,7 +128,8 @@
       "tracing_off_subheader": "Enable Exposure Notifications to receive information about possible exposures",
       "unauthorized_error_message": "You must authorize COVID-19 Exposure Logging in the Settings app to continue.",
       "unauthorized_error_title": "Please Update Settings",
-      "share":"Share the app and help contain the outbreak"
+      "share":"Share the app and help contain the outbreak",
+      "report_positive_result":"Report positive test result"
     }
   },
   "label": {
@@ -228,7 +229,6 @@
     "select_language": "Select Language"
   },
   "settings": {
-    "share_test_result": "Report Positive Test Result",
     "share_test_result_description": "Anonymously notify others you may have recently encountered if you test positive for COVID-19"
   }
 }
