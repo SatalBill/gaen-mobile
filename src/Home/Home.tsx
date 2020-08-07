@@ -168,24 +168,18 @@ const HomeScreen: FunctionComponent = () => {
             </View>
           </TouchableOpacity>
           <View style={style.activationStatusSectionContainer}>
-            <TouchableOpacity
-              disabled={isProximityTracingOn}
-              onPress={handleOnPressBluetooth}
-            >
-              <ActivationStatusSection
-                headerText={t("home.bluetooth.bluetooth_header")}
-                isActive={isBluetoothOn}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              disabled={isProximityTracingOn}
-              onPress={handleOnPressProximityTracing}
-            >
-              <ActivationStatusSection
-                headerText={t("home.bluetooth.proximity_tracing_header")}
-                isActive={isProximityTracingOn}
-              />
-            </TouchableOpacity>
+            <ActivationStatusSection
+              headerText={t("home.bluetooth.bluetooth_header")}
+              isActive={isBluetoothOn}
+              fixAction={handleOnPressBluetooth}
+              testID={"home-bluetooth-status-container"}
+            />
+            <ActivationStatusSection
+              headerText={t("home.bluetooth.proximity_tracing_header")}
+              isActive={isProximityTracingOn}
+              fixAction={handleOnPressProximityTracing}
+              testID={"home-proximity-tracing-status-container"}
+            />
           </View>
           <Button
             onPress={() => navigation.navigate(Stacks.AffectedUserStack)}
@@ -202,11 +196,15 @@ const HomeScreen: FunctionComponent = () => {
 interface ActivationStatusProps {
   headerText: string
   isActive: boolean
+  fixAction: () => void
+  testID: string
 }
 
 const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
   headerText,
   isActive,
+  fixAction,
+  testID,
 }) => {
   const { t } = useTranslation()
 
@@ -215,7 +213,12 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
   const iconFill = isActive ? Colors.primaryGreen : Colors.primaryRed
 
   return (
-    <View style={style.activationStatusContainer}>
+    <TouchableOpacity
+      disabled={isActive}
+      onPress={fixAction}
+      style={style.activationStatusContainer}
+      testID={testID}
+    >
       <View style={style.activationStatusLeftContainer}>
         <SvgXml
           xml={icon}
@@ -235,7 +238,7 @@ const ActivationStatusSection: FunctionComponent<ActivationStatusProps> = ({
           </GlobalText>
         </View>
       )}
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -344,7 +347,7 @@ const style = StyleSheet.create({
   },
   button: {
     alignSelf: "center",
-    marginBottom: Spacing.medium,
+    marginBottom: Spacing.large,
   },
 })
 
