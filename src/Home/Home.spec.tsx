@@ -23,7 +23,8 @@ jest.mock("../utils/index")
 describe("Home", () => {
   describe("When the enPermissionStatus is enabled and authorized and Bluetooth is on", () => {
     it("renders an active message", async () => {
-      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(true)
+      const isBluetoothOn = true
+      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
 
       const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
       const permissionProviderValue = createPermissionProviderValue(
@@ -65,7 +66,8 @@ describe("Home", () => {
 
   describe("When the enPermissionStatus is not enabled and not authorized", () => {
     it("renders an inactive message and a disabled message for proximity tracing", async () => {
-      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(true)
+      const isBluetoothOn = true
+      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
 
       const enPermissionStatus: ENPermissionStatus = [
         "UNAUTHORIZED",
@@ -102,7 +104,8 @@ describe("Home", () => {
 
   describe("When Bluetooth is off", () => {
     it("renders an inactive message and a disabled message for bluetooth", async () => {
-      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(false)
+      const isBluetoothOn = false
+      ;(isBluetoothEnabled as jest.Mock).mockResolvedValueOnce(isBluetoothOn)
 
       const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
       const permissionProviderValue = createPermissionProviderValue(
