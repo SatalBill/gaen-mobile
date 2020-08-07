@@ -15,7 +15,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useTranslation } from "react-i18next"
 import { SvgXml } from "react-native-svg"
 import { useNavigation } from "@react-navigation/native"
-import { useBluetoothStatus } from "react-native-bluetooth-status"
 
 import { usePermissionsContext } from "../PermissionsContext"
 import { useStatusBarEffect, Stacks } from "../navigation"
@@ -39,15 +38,16 @@ const HomeScreen: FunctionComponent = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { exposureNotifications } = usePermissionsContext()
-  const { btStatus } = useBluetoothStatus()
-
-  useStatusBarEffect("light-content")
-  const insets = useSafeAreaInsets()
-
   const [
     authorization,
     enablement,
   ]: ENPermissionStatus = exposureNotifications.status
+  const btStatus = true
+  // TODO: replace with actual Bluetooth status
+
+  useStatusBarEffect("light-content")
+  const insets = useSafeAreaInsets()
+
   const isEnabled = enablement === "ENABLED"
   const isAuthorized = authorization === "AUTHORIZED"
   const isEnabledAndAuthorized = isEnabled && isAuthorized

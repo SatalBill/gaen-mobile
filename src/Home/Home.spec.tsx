@@ -3,31 +3,32 @@ import { Alert, Platform } from "react-native"
 import { render, cleanup, wait, fireEvent } from "@testing-library/react-native"
 import "@testing-library/jest-native/extend-expect"
 
-import { ENPermissionStatus } from "../PermissionsContext"
 import Home from "./Home"
+import {
+  usePermissionsContext,
+  ENPermissionStatus,
+} from "../PermissionsContext"
 
 afterEach(cleanup)
 
+jest.mock("../PermissionsContext")
 describe("Home", () => {
-  describe("When the enPermissionStatus is enabled and authorized", () => {
+  describe("When the enPermissionStatus is enabled and authorized and Bluetooth is on", () => {
     it("renders a notifications are enabled message", () => {
       const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "ENABLED"]
-      const requestPermission = jest.fn()
+      ;(usePermissionsContext as jest.Mock).mockReturnValueOnce({
+        enPermissionStatus,
+      })
 
-      const { getByTestId, queryByTestId } = render(
-        <Home
-          enPermissionStatus={enPermissionStatus}
-          requestPermission={requestPermission}
-        />,
-      )
+      const { getByTestId } = render(<Home />)
 
       const header = getByTestId("home-header")
       const subheader = getByTestId("home-subheader")
-      const button = queryByTestId("home-request-permissions-button")
 
-      expect(header).toHaveTextContent("PathCheck")
-      expect(subheader).toHaveTextContent("Exposure notifications are on")
-      expect(button).toBeNull()
+      expect(header).toHaveTextContent("Active")
+      expect(subheader).toHaveTextContent(
+        "COVIDaware will remain active after the app has been closed",
+      )
     })
   })
 
@@ -39,14 +40,13 @@ describe("Home", () => {
           "DISABLED",
         ]
         const requestPermission = jest.fn()
+        ;(usePermissionsContext as jest.Mock).mockReturnValueOnce({
+          enPermissionStatus,
+          requestPermission,
+        })
         const alert = jest.spyOn(Alert, "alert")
 
-        const { getByTestId } = render(
-          <Home
-            enPermissionStatus={enPermissionStatus}
-            requestPermission={requestPermission}
-          />,
-        )
+        const { getByTestId } = render(<Home />)
         const button = getByTestId("home-request-permissions-button")
 
         fireEvent.press(button)
@@ -64,12 +64,7 @@ describe("Home", () => {
       const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "DISABLED"]
       const requestPermission = jest.fn()
 
-      const { getByTestId } = render(
-        <Home
-          enPermissionStatus={enPermissionStatus}
-          requestPermission={requestPermission}
-        />,
-      )
+      const { getByTestId } = render(<Home />)
 
       const header = getByTestId("home-header")
       const subheader = getByTestId("home-subheader")
@@ -84,12 +79,7 @@ describe("Home", () => {
       const enPermissionStatus: ENPermissionStatus = ["AUTHORIZED", "DISABLED"]
       const requestPermission = jest.fn()
 
-      const { getByTestId } = render(
-        <Home
-          enPermissionStatus={enPermissionStatus}
-          requestPermission={requestPermission}
-        />,
-      )
+      const { getByTestId } = render(<Home />)
       const button = getByTestId("home-request-permissions-button")
 
       fireEvent.press(button)
