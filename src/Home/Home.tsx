@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useEffect, useState } from "react"
 import {
   ScrollView,
   Alert,
@@ -23,6 +23,7 @@ import { ENPermissionStatus } from "../PermissionsContext"
 import { GlobalText } from "../components/GlobalText"
 import { Button } from "../components/Button"
 import { useApplicationInfo } from "../More/useApplicationInfo"
+import { isBluetoothEnabled } from "../gaen/nativeModule"
 
 import { Icons, Images } from "../assets"
 import {
@@ -42,11 +43,18 @@ const HomeScreen: FunctionComponent = () => {
     authorization,
     enablement,
   ]: ENPermissionStatus = exposureNotifications.status
-  const btStatus = true
-  // TODO: replace with actual Bluetooth status
-
-  useStatusBarEffect("light-content")
   const insets = useSafeAreaInsets()
+  useStatusBarEffect("light-content")
+
+  const [btStatus, setBTStatus] = useState(false)
+  const fetchBTStatus = async () => {
+    const status = await isBluetoothEnabled()
+    setBTStatus(status)
+  }
+
+  useEffect(() => {
+    fetchBTStatus()
+  }, [])
 
   const isEnabled = enablement === "ENABLED"
   const isAuthorized = authorization === "AUTHORIZED"
