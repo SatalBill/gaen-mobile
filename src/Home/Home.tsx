@@ -49,7 +49,7 @@ const HomeScreen: FunctionComponent = () => {
   const [btStatus, setBTStatus] = useState(false)
   const fetchBTStatus = async () => {
     const status = await isBluetoothEnabled()
-    setBTStatus(status)
+    setBTStatus(Boolean(status))
   }
 
   useEffect(() => {
@@ -79,8 +79,7 @@ const HomeScreen: FunctionComponent = () => {
       t("home.bluetooth.bluetooth_disabled_error_message"),
       [
         {
-          text: t("common.settings"),
-          onPress: () => Linking.openURL("App-prefs:root=Bluetooth"),
+          text: t("common.okay"),
         },
       ],
     )
@@ -352,3 +351,4 @@ const style = StyleSheet.create({
 })
 
 export default HomeScreen
+
