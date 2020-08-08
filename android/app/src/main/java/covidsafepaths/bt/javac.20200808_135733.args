@@ -1,0 +1,8 @@
+-Xlint
+-cp
+"Reading env from: .env"
+-sourcepath
+/Users/devinjameson/Documents/repos/gaen-mobile/android/app/src/main/java/
+-d
+/var/folders/h6/847dbbsj4hv_35l83fb35prc0000gn/T/nvimfKf8MD/115
+/var/folders/h6/847dbbsj4hv_35l83fb35prc0000gn/T/nvimfKf8MD/116/MainApplication.java
