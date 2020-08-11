@@ -57,7 +57,7 @@ const HomeScreen: FunctionComponent = () => {
 
   useEffect(() => {
     fetchBTStatus()
-  }, [])
+  })
 
   const isEnabled = enablement === "ENABLED"
   const isAuthorized = authorization === "AUTHORIZED"
